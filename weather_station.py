@@ -90,19 +90,57 @@ class CurrentConditionsDisplay(Observer):
 # TODO: implement StatisticsDisplay class and ForecastDisplay class.
 
 
-class StatisticsDisplay:
+class StatisticsDisplay():
     '''Keep track of the min/average/max measurements and display them.'''
-    past_temps = []
-    past_humidities = []
-    past_pressures = []
-    pass
+    all_temps = []
+    all_humidities = []
+    all_pressures = []
+
+    def track_temps(self, temperature):
+        self.all_temps.append(temperature)
+
+    def track_hum(self, humidity):
+        self.all_humidities.append(humidity)
+
+    def track_pressure(self, pressure):
+        self.all_pressures.append(pressure)
+
+    def find_min(data_int_list):
+        return data_int_list.min()
+
+    def find_max(data_int_list):
+        return data_int_list.max()
+
+    def find_avg(data_int_list):
+        return data_int_list.mean()
+
+    def display_min_avg_max(self):
+        min_temp = self.find_min(self.all_temps)
+        avg_temp = self.find_avg(self.all_temps)
+        max_temp = self.find_max(self.all_temps)
+
+        avg_humidity = self.find_avg(self.all_humidities)
+        max_humidity = self.find_max(self.all_humidities)
+        min_humidity = self.find_min(self.all_humidities)
+
+        min_pressure = self.find_min(self.all_pressures)
+        avg_pressure = self.find_avg(self.all_pressures)
+        max_pressure = self.find_max(self.all_pressures)
+
+        print("Min/Avg/Max")
+        print('Temperature - Min: ', min_temp,
+              ', Max: ', max_temp, ', Average: ', avg_temp)
+        print('Humidity - Min: ', min_humidity, ', Max: ', max_humidity,
+              ', Average: ', avg_humidity)
+        print('Pressure - Min: ', min_pressure, ', Max: ', max_pressure,
+              ', Average: ', avg_pressure)
 
 
 class ForecastDisplay:
     # The ForecastDisplay class shows the weather forcast based on the
     # current temperature, humidity and pressure. Use the following
     # formulas:
-    def calculate_forcast(temperature, humidity, pressure):
+    def calculate(temperature, humidity, pressure):
         forcast_temp = temperature + 0.11 * humidity + 0.2 * pressure
         forcast_humidity = humidity - 0.9 * humidity
         forcast_pressure = pressure + 0.1 * temperature - 0.21 * pressure
