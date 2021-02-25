@@ -8,6 +8,7 @@ class Subject:
     # to be registered ore removed.
     def registerObserver(observer):
         pass
+
     def removeObserver(observer):
         pass
     
@@ -25,42 +26,42 @@ class Observer:
     def update(self, temp, humidity, pressure):
         pass
 
+
 # WeatherData now implements the subject interface.
 class WeatherData(Subject):
-    
+
     def __init__(self):        
         self.observers = []
         self.temperature = 0
         self.humidity = 0
         self.pressure = 0
-    
-    
+
     def registerObserver(self, observer):
         # When an observer registers, we just 
         # add it to the end of the list.
         self.observers.append(observer)
-        
+
     def removeObserver(self, observer):
         # When an observer wants to un-register,
         # we just take it off the list.
         self.observers.remove(observer)
-    
+
     def notifyObservers(self):
         # We notify the observers when we get updated measurements
         # from the Weather Station.
         for ob in self.observers:
             ob.update(self.temperature, self.humidity, self.pressure)
-    
+
     def measurementsChanged(self):
         self.notifyObservers()
-    
+
     def setMeasurements(self, temperature, humidity, pressure):
         self.temperature = temperature
         self.humidity = humidity
         self.pressure = pressure
-        
+
         self.measurementsChanged()
-    
+
     # other WeatherData methods here.
 
 
@@ -109,20 +110,20 @@ class WeatherStation:
         # The StatisticsDisplay class should keep track of the min/average/max
         # measurements and display them.
 
-        # The ForecastDisplay class shows the weather forcast based on the current
-        # temperature, humidity and pressure. Use the following formuals :
+        # The ForecastDisplay class shows the weather forcast based on the
+        # current temperature, humidity and pressure. Use the following
+        # formulas:
         # forcast_temp = temperature + 0.11 * humidity + 0.2 * pressure
         # forcast_humadity = humidity - 0.9 * humidity
         # forcast_pressure = pressure + 0.1 * temperature - 0.21 * pressure
 
-        weather_data.setMeasurements(80, 65,30.4)
-        weather_data.setMeasurements(82, 70,29.2)
-        weather_data.setMeasurements(78, 90,29.2)
+        weather_data.setMeasurements(80, 65, 30.4)
+        weather_data.setMeasurements(82, 70, 29.2)
+        weather_data.setMeasurements(78, 90, 29.2)
 
         # un-register the observer
         weather_data.removeObserver(current_display)
-        weather_data.setMeasurements(120, 100,1000)
-
+        weather_data.setMeasurements(120, 100, 1000)
 
 
 if __name__ == "__main__":
