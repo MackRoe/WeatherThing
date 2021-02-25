@@ -11,7 +11,7 @@ class Subject:
 
     def removeObserver(observer):
         pass
-    
+
     # This method is called to notify all observers
     # when the Subject's state (measuremetns) has changed.
     def notifyObservers():
@@ -37,7 +37,7 @@ class WeatherData(Subject):
         self.pressure = 0
 
     def registerObserver(self, observer):
-        # When an observer registers, we just 
+        # When an observer registers, we just
         # add it to the end of the list.
         self.observers.append(observer)
 
@@ -91,10 +91,27 @@ class CurrentConditionsDisplay(Observer):
 
 
 class StatisticsDisplay:
+    '''Keep track of the min/average/max measurements and display them.'''
+    past_temps = []
+    past_humidities = []
+    past_pressures = []
     pass
 
 
 class ForecastDisplay:
+    # The ForecastDisplay class shows the weather forcast based on the
+    # current temperature, humidity and pressure. Use the following
+    # formulas:
+    def calculate_forcast(temp, humidity, pressure):
+        forcast_temp = temperature + 0.11 * humidity + 0.2 * pressure
+        forcast_humidity = humidity - 0.9 * humidity
+        forcast_pressure = pressure + 0.1 * temperature - 0.21 * pressure
+
+        print("FORCAST")
+        print("Temperature: ", forcast_temp)
+        print("Humidity: ", forcast_humidity)
+        print("Atmospheric Pressure: ", forcast_pressure)
+        
     pass
 
 
@@ -103,19 +120,12 @@ class WeatherStation:
         weather_data = WeatherData()
         current_display = CurrentConditionsDisplay(weather_data)
 
-        # TODO: Create two objects from StatisticsDisplay class and 
-        # ForecastDisplay class. Also register them to the concerete instance
+        # TODO: Create two objects from StatisticsDisplay class and
+        # ForecastDisplay class. Also register them to the concrete instance
         # of the Subject class so the they get the measurements' updates.
 
         # The StatisticsDisplay class should keep track of the min/average/max
         # measurements and display them.
-
-        # The ForecastDisplay class shows the weather forcast based on the
-        # current temperature, humidity and pressure. Use the following
-        # formulas:
-        # forcast_temp = temperature + 0.11 * humidity + 0.2 * pressure
-        # forcast_humadity = humidity - 0.9 * humidity
-        # forcast_pressure = pressure + 0.1 * temperature - 0.21 * pressure
 
         weather_data.setMeasurements(80, 65, 30.4)
         weather_data.setMeasurements(82, 70, 29.2)
