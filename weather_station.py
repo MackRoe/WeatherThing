@@ -68,7 +68,7 @@ class WeatherData(Subject):
 class CurrentConditionsDisplay(Observer):
 
     def __init__(self, weatherData):
-        self.temerature = 0
+        self.temperature = 0
         self.humidity = 0
         self.pressure = 0
 
@@ -77,13 +77,13 @@ class CurrentConditionsDisplay(Observer):
         # register the observer so it gets data updates.
 
     def update(self, temperature, humidity, pressure):
-        self.temerature = temperature
+        self.temperature = temperature
         self.humidity = humidity
         self.pressure = pressure
         self.display()
 
     def display(self):
-        print("Current conditions:", self.temerature, 
+        print("Current conditions:", self.temperature,
               "F degrees and", self.humidity, "[%] humidity",
               "and pressure", self.pressure)
 
@@ -102,7 +102,7 @@ class ForecastDisplay:
     # The ForecastDisplay class shows the weather forcast based on the
     # current temperature, humidity and pressure. Use the following
     # formulas:
-    def calculate_forcast(temp, humidity, pressure):
+    def calculate_forcast(temperature, humidity, pressure):
         forcast_temp = temperature + 0.11 * humidity + 0.2 * pressure
         forcast_humidity = humidity - 0.9 * humidity
         forcast_pressure = pressure + 0.1 * temperature - 0.21 * pressure
