@@ -106,12 +106,15 @@ class ForecastDisplay:
         forcast_temp = temperature + 0.11 * humidity + 0.2 * pressure
         forcast_humidity = humidity - 0.9 * humidity
         forcast_pressure = pressure + 0.1 * temperature - 0.21 * pressure
+        forcast_info = [forcast_temp, forcast_humidity, forcast_pressure]
 
         print("FORCAST")
         print("Temperature: ", forcast_temp)
         print("Humidity: ", forcast_humidity)
         print("Atmospheric Pressure: ", forcast_pressure)
-        
+
+        return forcast_info
+
     pass
 
 
